@@ -388,6 +388,13 @@ namespace jss {
                         std::declval<ValueType const &>())) {
                     return lhs.underlying_value() >= rhs.underlying_value();
                 }
+                friend constexpr std::strong_ordering // probably needs to be deduced instead
+                operator<=>(Derived const &lhs, Derived const &rhs) noexcept(
+                    noexcept(
+                        std::declval<ValueType const &>() <=>
+                        std::declval<ValueType const &>())) {
+                    return lhs.underlying_value() <=> rhs.underlying_value();
+                }
             };
         };
 
